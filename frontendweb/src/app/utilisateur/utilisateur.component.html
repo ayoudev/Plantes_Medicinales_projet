@@ -1,0 +1,113 @@
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <!-- Logo Section -->
+        <div class="col-lg-3">
+          <div class="header__logo">
+            <img [src]="OCPLogo" alt="OCP Logo" class="logo" />
+          </div>
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="col-lg-6">
+          <nav class="header__menu d-flex justify-content-center">
+            <ul class="d-flex mb-0">
+              <li><a href="/home">Home</a></li>
+              <li><a href="/plante">Plantes</a></li>
+              <li class="active"><a href="/utilisateur">Utilisateurs</a></li>
+              <li><a href="/maladie">Maladies</a></li>
+              <li><a href="/article">Articles</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Notifications and User Dropdown Section -->
+        <div class="col-lg-3">
+          <div class="header__cart">
+            <ul>
+              <li>
+                <a href="#">
+                  <div class="icon"><i class="bi bi-bell-fill"></i></div>
+                  <span>1</span>
+                </a>
+              </li>
+              <li class="dropdown" (click)="toggleDropdown()">
+                <a>
+                  <img [src]="avatar" alt="User Avatar" class="avatar" />
+                  <i class="arrow bi bi-chevron-down"></i>
+                </a>
+                <ul *ngIf="showDropdown" class="dropdown-menu">
+                  <li><a routerLink="/profil">Profile</a></li>
+                  <li><a href="#" (click)="logout()">Déconnexion</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="breadcrumb-section" [style.backgroundImage]="'url(' + deco + ')'" style="background-size: cover; background-position: center;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="breadcrumb__text">
+            <h2>Utilisateurs</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shopping-cart spad">
+    <div class="container">
+      <div class="row">
+        <br>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="shoping__cart__table__Mission-container">
+            <table class="shoping__cart__table__Mission">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Prénom</th>
+                  <th>Email</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let utilisateur of utilisateurs">
+                  <td>{{ utilisateur.lastname }}</td>
+                  <td>{{ utilisateur.firstname }}</td>
+                  <td>{{ utilisateur.email }}</td>
+                  <td class="shopping__cart__item__close">
+                    <i
+                      class="bi bi-trash"
+                      style="cursor: pointer; font-size: 18px; color: #b2b2b2;"
+                      (click)="showDeleteModal(utilisateur)"
+                    ></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal de confirmation -->
+<div class="modal" *ngIf="showDeleteConfirmModal" (click)="closeDeleteModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h4>Confirmer la suppression</h4>
+    <p>Êtes-vous sûr de vouloir supprimer {{ selectedUtilisateur?.lastname}} ?</p>
+    <button type="button" class="btn btn-danger" (click)="deleteUtilisateur()">Supprimer</button>
+    <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()">Annuler</button>
+  </div>
+</div>
+</body>
+
+

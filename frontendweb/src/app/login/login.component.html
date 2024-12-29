@@ -1,0 +1,53 @@
+<body>
+  <div class="wrapper">
+      <div class="form-box">
+          <!-- Logo Section -->
+          <div class="logo-container">
+              <img src="/assets/images/2-removebg-preview.png" alt="Logo" class="logo">
+          </div>
+          <div class="login-container" id="login">
+              <div class="top">
+                  <header>Se Connecter</header>
+              </div>
+              <div class="input-box">
+                  <input
+                      type="text"
+                      class="input-field"
+                      placeholder="Email"
+                      [(ngModel)]="email"
+                      name="email"
+                      required>
+                  <i class="bi bi-person-circle"></i>
+              </div>
+              <div class="input-box">
+                  <input
+                      type="password"
+                      class="input-field"
+                      placeholder="Mot de passe"
+                      [(ngModel)]="password"
+                      name="password"
+                      required>
+                  <i class="bi bi-lock"></i>
+              </div>
+              <div class="input-box">
+                  <button
+                      class="submit"
+                      (click)="onLogin()">
+                      Connecter
+                  </button>
+              </div>
+              <div class="signup-link">
+                  <p>Vous n'avez pas de compte ?
+                      <a routerLink="/register" (click)="redirection()">S'inscrire</a>
+                  </p>
+              </div>
+              <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+          </div>
+      </div>
+      <div class="quote">
+          <p>“C'est la nature qui guérit les malades” </p>
+          <p>- Hippocrate -</p>
+      </div>
+
+  </div>
+</body>

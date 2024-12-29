@@ -1,0 +1,499 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+/* Général */
+body {
+    height: 100%;
+    font-family: "Cairo", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    color: #111111;
+    font-weight: 400;
+    font-family:"Cairo", sans-serif;
+}
+
+h1 { font-size: 70px; }
+h2 { font-size: 36px; }
+h3 { font-size: 30px; }
+h4 { font-size: 24px; }
+h5 { font-size: 18px; }
+h6 { font-size: 16px; }
+
+p {
+    font-size: 16px;
+    color: #6f6f6f;
+    font-weight: 400;
+    line-height: 26px;
+    margin: 0 0 15px 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover, a:focus {
+    color: #6e903c;
+    text-decoration: none;
+    outline: none;
+}
+
+ul, ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Logo */
+.logo {
+    width: 270px;
+    height: auto;
+}
+
+
+.header__logo {
+    text-align: center;
+}
+
+.header__menu {
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.header__menu ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.header__menu ul li {
+    margin-right: 30px;
+    position: relative;
+}
+
+.header__menu ul li:last-child {
+    margin-right: 0;
+}
+.dropdown-menu li a:hover {
+    color: #6e903c;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+    list-style: none;
+    padding: 5px 0;
+}
+.header__cart {
+	text-align: right;
+	padding: 50px 0;
+}
+
+.header__cart ul {
+	display: inline-block;
+	margin-right: 25px;
+}
+.header__cart ul li {
+	list-style: none;
+	display: inline-block;
+	margin-right: 15px;
+}
+
+.header__cart ul li:last-child {
+	margin-right: 0;
+}
+
+.header__cart ul li a {
+	position: relative;
+}
+
+.header__cart ul li a .icon{
+	font-size: 20px;
+	color: #1c1c1c;
+}
+
+.header__cart ul li a span {
+	height: 13px;
+	width: 13px;
+	background: #6e903c;
+	font-size: 10px;
+	color: #ffffff;
+	line-height: 13px;
+	text-align: center;
+	font-weight: 700;
+	display: inline-block;
+	border-radius: 50%;
+	position: absolute;
+	top: 0;
+	right: -12px;
+}
+.dropdown-menu li {
+    padding: 8px 20px;
+    font-size: 14px;
+    color: #333333;
+    cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+    background-color: #ffffff;
+}
+
+.dropdown-menu li a {
+    text-decoration: none;
+    color: #000000;
+    font-family: "Cairo", sans-serif;
+}
+
+.header__menu ul li a {
+    font-size: 14px;
+    color: #1c1c1c;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 5px 0;
+    display: block;
+}
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+.header__menu ul li.active a{
+    color: #6e903c;
+}
+.header__menu ul li a:hover{
+    color: #6e903c;
+}
+
+/* Dropdown Menu */
+.header__menu ul li .header__menu__dropdown {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    background: #222222;
+    width: 180px;
+    padding: 5px 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.header__menu ul li:hover .header__menu__dropdown {
+    opacity: 1;
+    visibility: visible;
+}
+
+.header__menu__dropdown li {
+    display: block;
+}
+
+.header__menu__dropdown li a {
+    color: #ffffff;
+    font-weight: 400;
+    padding: 5px 15px;
+}
+
+.header__menu__dropdown li a:hover {
+    color: #6e903c;
+}
+
+/* Hero Section */
+.hero {
+    padding: 50px 0;
+}
+
+.hero__text {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.hero__text span {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #6e903c
+}
+
+.hero__text h2 {
+    font-size: 46px;
+    color: #252525;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.hero__text p {
+    margin-bottom: 35px;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .header__menu ul {
+        flex-direction: column;
+        text-align: center;
+    }
+    .header__menu ul li {
+        margin: 10px 0;
+    }
+    .hero__text h2 {
+        font-size: 36px;
+    }
+}
+
+.breadcrumb-section {
+	display: flex;
+	align-items: center;
+	padding: 80px 0 80px;
+}
+
+.breadcrumb__text h2 {
+    font-family: "Parisienne", cursive;
+	font-size: 60px;
+	color: #ffffff;
+	font-weight: 400;
+}
+
+
+.ajout{ 
+	background-color: #6e903c;
+	 margin-top: 40px;
+     color: #fff;
+}
+
+/* Table Styles */
+.shoping__cart__table__Mission-container {
+    max-width: 100%;
+    max-height: 400px; /* Adjust the height as necessary */
+    overflow: auto;
+    border-radius: 20px;
+}
+
+.shoping__cart__table__Mission {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.shoping__cart__table__Mission th,
+.shoping__cart__table__Mission td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 150px; 
+    padding: 15px; /* Adjusted padding */
+    font-size: 16px;
+    text-align: left;
+}
+
+.shoping__cart__table__Mission th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+}
+
+.shoping__cart__table__Mission td {
+    padding: 15px;
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+}
+
+.shoping__cart__table__Mission h5 {
+    font-size: 18px;
+    margin: 0; /* Remove any margin to keep text aligned */
+}
+
+.shoping__cart__table__Mission .shoping__cart__description {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* Table - Interaction with the Icons */
+.shoping__cart__item__close i {
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.shoping__cart__item__close i:hover {
+    color: #6e903c; /* Change the color on hover */
+    transform: scale(1.1); /* Light zoom effect */
+}
+
+/* Add hover effect for rows */
+.shoping__cart__table__Mission tbody tr:hover {
+    background-color: #f9f9f9; /* Change background color on hover */
+    cursor: pointer;
+}
+
+/* Active row style */
+.shoping__cart__table__Mission .active-row {
+    background-color: #d4edda; /* Highlight the active row */
+}
+
+/* Adjusting first column width */
+.shoping__cart__table__Mission td:first-child {
+    max-width: 200px; /* Increase width for the first column (Maladies) */
+}
+
+/* Responsive table adjustments */
+@media (max-width: 768px) {
+    .shoping__cart__table__Mission th, 
+    .shoping__cart__table__Mission td {
+        font-size: 14px; /* Reduce font size on small screens */
+        padding: 10px;
+    }
+
+    .shoping__cart__table__Mission {
+        width: 100%;
+        overflow-x: auto;
+        display: block; /* Allow horizontal scrolling */
+    }
+}
+
+/* Style global pour le modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Légère transparence pour l'arrière-plan */
+    z-index: 1000;
+  }
+  
+  /* Contenu du modal */
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 500px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Titre du modal */
+  .modal-content h4 {
+    text-align: center;
+    font-family: "Parisienne", cursive;
+    font-size: 30px;
+    color: #6e903c; /* Couleur verte comme sur l'image */
+    margin-bottom: 40px;
+    margin-top: 30px;
+  }
+  
+  /* Style des champs du formulaire */
+  .modal-content label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  /* Style des champs de saisie */
+  .modal-content input,
+  .modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  .modal-content input:focus,
+.modal-content textarea:focus {
+    border: 2px solid #6e903c;
+  outline: none; /* Removes the default blue outline */
+}
+  
+  /* Style des boutons */
+  .modal-content button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 10px;
+  }
+  
+  .modal-content .btn-success {
+    background-color: #6e903c; /* Bouton vert */
+    color: white;
+  }
+  
+  .modal-content button:hover {
+    opacity: 0.9;
+  }
+  
+  /* Style des boutons de confirmation dans le modal */
+  .modal-content .d-flex {
+    justify-content: space-between;
+  }
+  /* Style pour la modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Contenu de la modal */
+  .modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%; /* Largeur adaptable */
+    max-width: 600px; /* Limite la largeur maximale */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* Empêche le dépassement */
+    max-height: 80vh; /* Limite la hauteur de la modal */
+    overflow-y: auto; /* Ajoute un défilement vertical si le contenu dépasse */
+  }
+  
+  /* Détails spécifiques */
+  .modal-details p {
+    word-wrap: break-word; /* Permet au texte long de passer à la ligne */
+    margin: 10px 0;
+  }
+  
+  /* Bouton Fermer */
+  .modal-content button {
+    margin-top: 15px;
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .modal-content .btn-danger {
+    background-color: #ca2121; /* Bouton vert */
+    color: white;
+  }
+ 
+  
+  
