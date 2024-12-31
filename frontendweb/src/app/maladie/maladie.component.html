@@ -1,0 +1,190 @@
+<body>
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <!-- Logo Section -->
+          <div class="col-lg-3">
+            <div class="header__logo">
+              <img [src]="OCPLogo" alt="OCP Logo" class="logo" />
+            </div>
+          </div>
+
+          <!-- Navigation Section -->
+          <div class="col-lg-6">
+            <nav class="header__menu d-flex justify-content-center">
+              <ul class="d-flex mb-0">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/plante">Plantes</a></li>
+                <li><a href="/utilisateur">Utilisateurs</a></li>
+                <li class="active"><a href="/maladie">Maladies</a></li>
+                <li><a href="/article">Articles</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <!-- Notifications and User Dropdown Section -->
+          <div class="col-lg-3">
+            <div class="header__cart">
+              <ul>
+                <!-- Notification Icon -->
+                <li>
+                  <a href="#">
+                    <div class="icon"><i class="bi bi-bell-fill"></i></div>
+                    <span>1</span>
+                  </a>
+                </li>
+
+                <!-- User Dropdown -->
+                <li class="dropdown" (click)="toggleDropdown()">
+                  <a>
+                    <img [src]="avatar" alt="User Avatar" class="avatar" />
+                    <i class="arrow bi bi-chevron-down"></i>
+                  </a>
+                  <!-- Show dropdown menu when showDropdown is true -->
+                  <ul *ngIf="showDropdown" class="dropdown-menu">
+                    <li><a routerLink="/profile">Profile</a></li>
+                    <li><a href="#" (click)="logout()">Déconnexion</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Breadcrumb Section -->
+    <section class="breadcrumb-section" [style.backgroundImage]="'url(' + deco + ')'" style="background-size: cover; background-position: center;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <div class="breadcrumb__text">
+              <h2>Maladies</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table Section -->
+    <section class="shopping-cart spad">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="shopping__cart__btns d-flex justify-content-end mb-3">
+              <button (click)="toggleAddModal()" class="btn btn-success custom-btn-primary ajout">
+                <span class="icon_loading"></span> Ajouter Maladie
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="shoping__cart__table__Mission-container">
+              <table class="shoping__cart__table__Mission">
+                <thead>
+                  <tr>
+                    <th>Maladie</th>
+                    <th>Informations</th>
+                    <th>Symptômes</th>
+                    <th>Causes</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of maladie">
+                    <td>{{ item.nom }}</td>
+                    <td>{{ item.informations }}</td>
+                    <td>{{ item.symptomes }}</td>
+                    <td>{{ item.causes }}</td>
+                    <td class="shopping__cart__item__close">
+                      <i class="bi bi-trash" style="cursor: pointer; font-size: 18px; color: #b2b2b2;" (click)="showDeleteModal(item)"></i>
+                      <i class="bi bi-pencil-square"  style="cursor: pointer; margin-left: 10px; font-size: 18px; color: #b2b2b2;" (click)="openEditModal(item)"></i>
+                      <i class="bi bi-info-circle"  style="cursor: pointer; margin-left: 10px; font-size: 18px; color: #b2b2b2;" (click)="openDetailsModal(item)"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="modal" *ngIf="showAddModal" (click)="closeAddModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()"> <!-- Stop propagation to prevent closing modal when clicking inside -->
+          <h4>Ajouter Maladie</h4>
+          <form (ngSubmit)="addMaladie()">
+            <input id="nom" [(ngModel)]="newMaladie.nom" name="nom" placeholder="Maladie" required />
+            <textarea id="informations" [(ngModel)]="newMaladie.informations" name="informations" placeholder="Informations"required></textarea>
+            <textarea id="symptomes" [(ngModel)]="newMaladie.symptomes" name="symptomes" placeholder="Symptômes"></textarea>
+            <textarea id="causes" [(ngModel)]="newMaladie.causes" name="causes" placeholder="Causes" required></textarea>
+
+            <button type="submit" class="btn btn-success">Ajouter</button>
+            <button type="button" (click)="closeAddModal()" class="btn btn-secondary">Fermer</button>
+          </form>
+        </div>
+    </div>
+    <div class="modal" *ngIf="showDeleteConfirmModal" (click)="closeDeleteModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()"> <!-- Stop propagation to prevent closing modal when clicking inside -->
+          <h4>Confirmer la suppression</h4>
+          <p>Êtes-vous sûr de vouloir supprimer cette maladie ?</p>
+          <button type="button" class="btn btn-danger" (click)="deleteMaladie()">Supprimer</button>
+          <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()">Annuler</button>
+        </div>
+    </div>
+    <!-- Update Modal -->
+<div class="modal" *ngIf="showUpdateModal" (click)="closeUpdateModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()"> <!-- Stop propagation to prevent closing modal when clicking inside -->
+      <h4>Modifier Maladie</h4>
+      <form (ngSubmit)="updateMaladie()">
+        <input
+          id="updateNom"
+          [(ngModel)]="selectedMaladie.nom"
+          name="nom"
+          placeholder="Nom de la Maladie"
+          required
+        />
+        <textarea
+          id="updateInformations"
+          [(ngModel)]="selectedMaladie.informations"
+          name="informations"
+          placeholder="Informations"
+          required
+        ></textarea>
+        <textarea
+          id="updateSymptomes"
+          [(ngModel)]="selectedMaladie.symptomes"
+          name="symptomes"
+          placeholder="Symptômes"
+        ></textarea>
+        <textarea
+          id="updateCauses"
+          [(ngModel)]="selectedMaladie.causes"
+          name="causes"
+          placeholder="Causes"
+          required
+        ></textarea>
+
+        <button type="submit" class="btn btn-success">Mettre à jour</button>
+        <button type="button" (click)="closeUpdateModal()" class="btn btn-secondary">Fermer</button>
+      </form>
+    </div>
+  </div>
+<!-- Details Modal -->
+<div class="modal" *ngIf="showDetailsModal && selectedMaladie" (click)="closeDetailsModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()"> <!-- Prevent closing modal when clicking inside -->
+      <h4>Détails de la Maladie</h4>
+      <div class="modal-details">
+        <p><strong>Nom:</strong> {{ selectedMaladie.nom || 'Non défini' }}</p>
+        <p><strong>Informations:</strong> {{ selectedMaladie.informations || 'Non défini' }}</p>
+        <p><strong>Symptômes:</strong> {{ selectedMaladie.symptomes || 'Non défini' }}</p>
+        <p><strong>Causes:</strong> {{ selectedMaladie.causes || 'Non défini' }}</p>
+
+      </div>
+      <button type="button" (click)="closeDetailsModal()" class="btn btn-secondary">Fermer</button>
+    </div>
+  </div>
+
+
+
+  </body>

@@ -1,0 +1,129 @@
+<body>
+<header class="header">
+  <div class="container">
+    <div class="row">
+      <!-- Logo Section -->
+      <div class="col-lg-3">
+        <div class="header__logo">
+          <img [src]="OCPLogo" alt="OCP Logo" class="logo"/>
+        </div>
+      </div>
+
+      <!-- Navigation Section -->
+      <div class="col-lg-6">
+        <nav class="header__menu d-flex justify-content-center">
+          <ul class="d-flex mb-0">
+            <li><a href="/user">Home</a></li>
+            <li class="active"><a href="/plant">Plantes</a></li>
+            <li><a href="/articl">Articles</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Notifications and User Dropdown Section -->
+      <div class="col-lg-3">
+        <div class="header__cart">
+          <ul>
+            <!-- Notification Icon -->
+            <li>
+              <a href="#">
+                <div class="icon"><i class="bi bi-bell-fill"></i></div>
+                <span>1</span>
+              </a>
+            </li>
+
+            <!-- User Dropdown -->
+            <li class="dropdown" (click)="toggleDropdown()">
+              <a>
+                <img [src]="avatar" alt="User Avatar" class="avatar"/>
+                <i class="arrow bi bi-chevron-down"></i>
+              </a>
+              <!-- Show dropdown menu when showDropdown is true -->
+              <ul *ngIf="showDropdown" class="dropdown-menu">
+                <li><a routerLink="/profile">Profile</a></li>
+                <li><a href="#" (click)="logout()">Déconnexion</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="breadcrumb-section" [style.backgroundImage]="'url(' + deco + ')'"
+         style="background-size: cover; background-position: center;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="breadcrumb__text">
+          <h2>Plantes</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="product_spad">
+  <div class="container">
+    <div class="row">
+      <!-- Filter by Maladie -->
+      <div class="col-lg-4 col-md-5">
+        <div class="filter__sort">
+          <span for="maladie-filter">Filtrer par Maladie :</span>
+          <select
+            id="maladie-filter"
+            class="form-select"
+            [(ngModel)]="selectedMaladie"
+            (change)="filterPlantesByMaladie(selectedMaladie)">
+            <option value="all">Toutes</option>
+            <option *ngFor="let maladie of maladies" [value]="maladie.nom">
+              {{ maladie.nom }}
+            </option>
+          </select>
+
+        </div>
+
+      </div>
+
+      <!-- Display number of available plantes -->
+      <div class="col-lg-4 col-md-4">
+        <div class="filter__found">
+          <h6><span>{{ plantes.length }}</span> Plantes Disponibles</h6>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plants Display Section -->
+    <div class="row">
+      <div *ngIf="plantes.length === 0" class="col-12 no-plantes-message">
+        <i class="fas fa-exclamation-triangle"></i>
+        <h1>Aucune plante trouvée</h1>
+      </div>
+      <div *ngFor="let plante of plantes" class="col-lg-4 col-md-6 col-sm-6">
+        <div class="product__item">
+          <div
+            class="product__item__pic set-bg"
+            [ngStyle]="{
+    'background-image': 'url(' + (plante.imageBase64 ? 'data:image/jpeg;base64,' + plante.imageBase64 : '') + ')',
+    'background-size': 'cover',
+    'background-position': 'center'
+  }"
+          >
+          </div>
+          <div class="product__item__text">
+            <h6><b>{{ plante.nom }} </b></h6>
+            <h6><b>Description : </b>{{ plante.description }}</h6>
+            <h6><b>Propriété : </b>{{ plante.propriete }}</h6>
+            <h6><b>Utilisation : </b>{{ plante.utilisation }}</h6>
+            <h6><b>Précaution : </b>{{ plante.precaution }}</h6>
+            <h6><b>Région : </b>{{ plante.regionGeographique }}</h6>
+            <h6><b>Catégorie : </b>{{ plante.categorie?.nom}}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</body>
+

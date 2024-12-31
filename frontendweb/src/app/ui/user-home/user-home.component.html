@@ -1,0 +1,69 @@
+<body>
+<header class="header">
+  <div class="container">
+    <div class="row">
+      <!-- Logo Section -->
+      <div class="col-lg-3">
+        <div class="header__logo">
+          <img [src]="OCPLogo" alt="OCP Logo" class="logo" />
+        </div>
+      </div>
+
+      <!-- Navigation Section -->
+      <div class="col-lg-6">
+        <nav class="header__menu d-flex justify-content-center">
+          <ul class="d-flex mb-0">
+            <li class="active"><a href="/user">Home</a></li>
+            <li><a href="/plant">Plantes</a></li>
+            <li><a href="/articl">Articles</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Notifications and User Dropdown Section -->
+      <div class="col-lg-3">
+        <div class="header__cart">
+          <ul>
+            <!-- Notification Icon -->
+            <li>
+              <a href="#">
+                <div class="icon"><i class="bi bi-bell-fill"></i></div>
+                <span>1</span>
+              </a>
+            </li>
+
+            <!-- User Dropdown -->
+            <li class="dropdown" (click)="toggleDropdown()">
+              <a>
+                <img [src]="avatar" alt="User Avatar" class="avatar" />
+                <i class="arrow bi bi-chevron-down"></i>
+              </a>
+              <!-- Show dropdown menu when showDropdown is true -->
+              <ul *ngIf="showDropdown" class="dropdown-menu">
+                <li><a href="/profil">Profile</a></li>
+                <li><a href="#" (click)="logout()">Déconnexion</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="breadcrumb-section" [style.backgroundImage]="'url(' + deco + ')'" style="background-size: cover; background-position: center;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div class="breadcrumb__text">
+          <h2>Bienvenu</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+
+</body>
+

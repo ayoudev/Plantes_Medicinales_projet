@@ -1,0 +1,133 @@
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <!-- Logo Section -->
+        <div class="col-lg-3">
+          <div class="header__logo">
+            <img [src]="OCPLogo" alt="OCP Logo" class="logo" />
+          </div>
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="col-lg-6">
+          <nav class="header__menu d-flex justify-content-center">
+            <ul class="d-flex mb-0">
+              <li class="active"><a href="/home">Home</a></li>
+              <li><a href="/plante">Plantes</a></li>
+              <li><a href="/utilisateur">Utilisateurs</a></li>
+              <li><a href="/maladie">Maladies</a></li>
+              <li><a href="/article">Articles</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Notifications and User Dropdown Section -->
+        <div class="col-lg-3">
+          <div class="header__cart">
+            <ul>
+              <!-- Notification Icon -->
+              <li>
+                <a href="#">
+                  <div class="icon"><i class="bi bi-bell-fill"></i></div>
+                  <span>1</span>
+                </a>
+              </li>
+
+              <!-- User Dropdown -->
+              <li class="dropdown" (click)="toggleDropdown()">
+                <a>
+                  <img [src]="avatar" alt="User Avatar" class="avatar" />
+                  <i class="arrow bi bi-chevron-down"></i>
+                </a>
+                <!-- Show dropdown menu when showDropdown is true -->
+                <ul *ngIf="showDropdown" class="dropdown-menu">
+                  <li><a routerLink="/profile">Profile</a></li>
+                  <li><a href="#" (click)="logout()">Déconnexion</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section
+    class="breadcrumb-section"
+    [style.backgroundImage]="'url(' + deco + ')'"
+    style="background-size: cover; background-position: center;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="breadcrumb__text">
+            <h2>Statistique</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container mt-5">
+    <!-- Section pour le graphique -->
+    <div class="row">
+      <div class="col-lg-12 mb-4">
+        <div class="chart-container shadow-lg p-4 rounded bg-white">
+          <h3 class="text-center text-primary font-weight-bold">Aperçu des Statistiques</h3>
+          <canvas id="canvas" width="400" height="400"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Liste des statistiques -->
+    <div class="row mt-4">
+      <div class="col-lg-12">
+        <div class="list-container shadow-lg p-4 rounded bg-white">
+          <h4 class="text-center text-secondary">Répartition des données :</h4>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Plantes
+              <span class="badge badge-success badge-pill">{{ stats.plantes }}%</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Maladies
+              <span class="badge badge-danger badge-pill">{{ stats.maladies }}%</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Articles
+              <span class="badge badge-primary badge-pill">{{ stats.articles }}%</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cartes de Statistiques -->
+    <div class="row mt-5">
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="stat-card shadow-lg p-4 rounded text-center bg-gradient-success text-white">
+          <i class="bi bi-tree-fill icon-large"></i>
+          <h3 class="mt-3">{{ stats.plantes }}</h3>
+          <p>Nombre de Plantes</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="stat-card shadow-lg p-4 rounded text-center bg-gradient-primary text-white">
+          <i class="bi bi-newspaper icon-large"></i>
+          <h3 class="mt-3">{{ stats.articles }}</h3>
+          <p>Nombre d'Articles</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="stat-card shadow-lg p-4 rounded text-center bg-gradient-danger text-white">
+          <i class="bi bi-shield-exclamation icon-large"></i>
+          <h3 class="mt-3">{{ stats.maladies }}</h3>
+          <p>Nombre de Maladies</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>

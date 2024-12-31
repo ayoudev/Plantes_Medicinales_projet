@@ -1,0 +1,96 @@
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <!-- Logo Section -->
+        <div class="col-lg-3">
+          <div class="header__logo">
+            <img [src]="OCPLogo" alt="OCP Logo" class="logo"/>
+          </div>
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="col-lg-6">
+          <nav class="header__menu d-flex justify-content-center">
+            <ul class="d-flex mb-0">
+              <li><a href="/user">Home</a></li>
+              <li class="active"><a href="/plant">Plantes</a></li>
+              <li><a href="/articl">Articles</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Notifications and User Dropdown Section -->
+        <div class="col-lg-3">
+          <div class="header__cart">
+            <ul>
+              <!-- Notification Icon -->
+              <li>
+                <a href="#">
+                  <div class="icon"><i class="bi bi-bell-fill"></i></div>
+                  <span>1</span>
+                </a>
+              </li>
+
+              <!-- User Dropdown -->
+              <li class="dropdown" (click)="toggleDropdown()">
+                <a>
+                  <img [src]="avatar" alt="User Avatar" class="avatar"/>
+                  <i class="arrow bi bi-chevron-down"></i>
+                </a>
+                <!-- Show dropdown menu when showDropdown is true -->
+                <ul *ngIf="showDropdown" class="dropdown-menu">
+                  <li><a routerLink="/profil">Profile</a></li>
+                  <li><a href="#" (click)="logout()">Déconnexion</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-4 border-right d-flex flex-column align-items-center text-center py-5">
+      <img
+        [src]="userData.imageUrl || 'assets/images/pro.png'"
+        alt="Profile Image"
+        class="rounded-circle mb-3"
+        style="width: 150px; height: 150px;"
+      />
+      <h5>{{ userData.firstname }} {{ userData.lastname }}</h5>
+      <p class="text-muted">{{ userData.email }}</p>
+    </div>
+
+    <div class="col-md-8 py-5">
+      <form>
+        <div class="row">
+          <div class=" mb-3">
+            <label for="firstname" class="form-label">
+              Nom:
+              <span class="text-muted fst-italic">{{ userData.lastname }}</span>
+            </label>
+          </div>
+          <div class=" mb-3">
+            <label for="lastname" class="form-label">
+              Prénom:
+              <span class="text-muted fst-italic">{{ userData.firstname }}</span>
+            </label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">
+            Email:
+            <span class="text-muted fst-italic">{{ userData.email }}</span>
+          </label>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+</body>
+

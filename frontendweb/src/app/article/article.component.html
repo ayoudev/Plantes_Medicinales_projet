@@ -1,0 +1,224 @@
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <!-- Logo Section -->
+        <div class="col-lg-3">
+          <div class="header__logo">
+            <img [src]="OCPLogo" alt="OCP Logo" class="logo" />
+          </div>
+        </div>
+
+        <!-- Navigation Section -->
+        <div class="col-lg-6">
+          <nav class="header__menu d-flex justify-content-center">
+            <ul class="d-flex mb-0">
+              <li><a href="/home">Home</a></li>
+              <li><a href="/plante">Plantes</a></li>
+              <li><a href="/utilisateur">Utilisateurs</a></li>
+              <li><a href="/maladie">Maladies</a></li>
+              <li class="active"><a href="/article">Articles</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Notifications and User Dropdown Section -->
+        <div class="col-lg-3">
+          <div class="header__cart">
+            <ul>
+              <!-- Notification Icon -->
+              <li>
+                <a href="#">
+                  <i class="bi bi-bell-fill"></i>
+                  <span>1</span>
+                </a>
+              </li>
+
+              <!-- User Dropdown -->
+              <li class="dropdown" (click)="toggleDropdown()">
+                <a>
+                  <img [src]="avatar" alt="User Avatar" class="avatar" />
+                  <i class="bi bi-chevron-down"></i>
+                </a>
+                <ul *ngIf="showDropdown" class="dropdown-menu">
+                  <li><a href="/profile">Profile</a></li>
+                  <li><a href="#" (click)="logout()">Déconnexion</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb Section -->
+  <section
+    class="breadcrumb-section"
+    [style.backgroundImage]="'url(' + deco + ')'"
+    style="background-size: cover; background-position: center;"
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <div class="breadcrumb__text">
+            <h2>Articles</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="hero">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <!-- Espace réservé pour d'autres composants ou contenu -->
+        </div>
+        <div class="col-lg-9">
+          <div class="search">
+            <div class="search__form">
+              <form (submit)="onSearchSubmit($event)">
+
+                  <select
+                    [(ngModel)]="searchQuery"
+                    name="selectedPlant"
+                    class="form-control"
+                  >
+                    <option value="" disabled selected>Selectionner une plante</option>
+                    <option [value]="0">All</option> <!-- Option pour tous les articles -->
+                    <option *ngFor="let plant of plantes" [value]="plant.id">
+                      {{ plant.nom }}
+                    </option>
+                  </select>
+
+
+                <button type="submit" class="site-btn">Recherche</button>
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Articles Section -->
+  <section class="shopping-cart spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="shopping__cart__btns d-flex justify-content-end mb-3">
+            <button class="btn btn-success ajout" (click)="openAddModal()">
+              Ajouter Article
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let article of filteredArticles" class="card mb-3">
+        <div class="row no-gutters">
+          <div class="col-md-3">
+            <img [src]="'data:image/jpeg;base64,' + article.image" alt="Image de l'article" />
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title">{{ article.titre }}</h5>
+              <p class="card-text">{{ article.contenu }}</p>
+            </div>
+          </div>
+          <div class="col-md-2 text-right p-3">
+            <button class="btn btn-success btn-sm mx-1" (click)="openUpdateModal(article)">
+              Modifier
+            </button>
+            <button class="btn btn-danger btn-sm mx-1" (click)="openDeleteModal(article.id)">
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Ajouter Article -->
+  <!-- Modal Ajouter Article -->
+<div class="modal" *ngIf="showAddModal" (click)="closeAddModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h4>Ajouter Article</h4>
+      <form (ngSubmit)="addArticle()">
+        <input
+          id="titre"
+          [(ngModel)]="newArticle.titre"
+          name="titre"
+          placeholder="Titre"
+          required
+        />
+        <textarea
+          id="contenu"
+          [(ngModel)]="newArticle.contenu"
+          name="contenu"
+          placeholder="Contenu"
+          required
+        ></textarea>
+        <select id="plante" [(ngModel)]="newArticle.plante" name="plante" required>
+            <option value="" disabled selected>Choisir une Plante</option> <!-- Option par défaut -->
+            <option *ngFor="let plante of plantes" [ngValue]="plante">{{ plante.nom }}</option>
+          </select>
+
+        <div class="form-group">
+            <label for="images">Télécharger une image </label>
+            <input type="file" id="images"  class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-success">Ajouter</button>
+        <button type="button" class="btn btn-secondary" (click)="closeAddModal()">Fermer</button>
+      </form>
+    </div>
+  </div>
+  <div class="modal" *ngIf="showUpdateModal" (click)="closeUpdateModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()"> <!-- Stop propagation to prevent closing modal when clicking inside -->
+      <h4>Modifier Article</h4>
+      <form (ngSubmit)="updateArticle()">
+        <input
+          id="titre"
+          [(ngModel)]="selectedArticle.titre"
+          name="titre"
+          placeholder="Titre"
+          required
+        />
+        <textarea
+          id="contenu"
+          [(ngModel)]="selectedArticle.contenu"
+          name="contenu"
+          placeholder="Contenu"
+          required
+        ></textarea>
+        <select id="plante" [(ngModel)]="selectedArticle.plante" name="plante" required>
+            <option value="" disabled selected>Choisir une Plante</option> <!-- Option par défaut -->
+            <option *ngFor="let plante of plantes" [ngValue]="plante">{{ plante.nom }}</option>
+          </select>
+
+        <div class="form-group">
+            <label for="images">Télécharger une image </label>
+            <input type="file" id="images"  class="form-control"  />
+          </div>
+        <button type="submit" class="btn btn-success">Mettre à jour</button>
+        <button type="button" (click)="closeUpdateModal()" class="btn btn-secondary">Fermer</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Supprimer Article -->
+  <div class="modal" *ngIf="showDeleteConfirmModal" (click)="closeDeleteModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h4>Confirmer la suppression</h4>
+      <p>Êtes-vous sûr de vouloir supprimer cet article ?</p>
+      <button type="button" class="btn btn-danger" (click)="deleteArticle()">Supprimer</button>
+      <button type="button" class="btn btn-secondary" (click)="closeDeleteModal()">Annuler</button>
+    </div>
+  </div>
+
+  <!-- Modal Commentaires -->
+
+</body>

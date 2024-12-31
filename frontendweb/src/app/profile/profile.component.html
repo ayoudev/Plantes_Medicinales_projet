@@ -1,0 +1,129 @@
+<body>
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <!-- Logo Section -->
+          <div class="col-lg-3">
+            <div class="header__logo">
+              <img [src]="OCPLogo" alt="OCP Logo" class="logo" />
+            </div>
+          </div>
+  
+          <!-- Navigation Section -->
+          <div class="col-lg-6">
+            <nav class="header__menu d-flex justify-content-center">
+              <ul class="d-flex mb-0">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/plante">Plantes</a></li>
+                <li><a href="/utilisateur">Utilisateurs</a></li>
+                <li><a href="/maladie">Maladies</a></li>
+                <li><a href="/article">Articles</a></li>
+              </ul>
+            </nav>
+          </div>
+  
+          <!-- Notifications and User Dropdown Section -->
+          <div class="col-lg-3">
+            <div class="header__cart">
+              <ul>
+                <!-- Notification Icon -->
+                <li>
+                  <a href="#">
+                    <div class="icon"><i class="bi bi-bell-fill"></i></div>
+                    <span>1</span>
+                  </a>
+                </li>
+  
+                <!-- User Dropdown -->
+                <li class="dropdown" (click)="toggleDropdown()">
+                  <a>
+                    <img [src]="avatar" alt="User Avatar" class="avatar" />
+                    <i class="arrow bi bi-chevron-down"></i>
+                  </a>
+                  <!-- Show dropdown menu when showDropdown is true -->
+                  <ul *ngIf="showDropdown" class="dropdown-menu">
+                    <li><a routerLink="/profile">Profile</a></li>
+                    <li><a href="#" (click)="logout()">Déconnexion</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+        <div class="container rounded bg-white mt-5 mb-5">
+          <div class="row">
+            <!-- Section de l'image et des informations utilisateur -->
+            <div class="col-md-4 border-right d-flex flex-column align-items-center text-center py-5">
+              <img
+                [src]="userData.imageUrl || 'assets/images/pro.png'"
+                alt="Profile Image"
+                class="rounded-circle mb-3"
+                style="width: 150px; height: 150px;"
+              />
+              <h5>{{ userData.nom }} {{ userData.prenom }}</h5>
+              <p class="text-muted">{{ userData.email }}</p>
+              <button class="btn btn-success mt-2" (click)="handleProfileImageChange($event)">
+                Changer photo de profile
+              </button>
+            </div>
+      
+            <!-- Section du formulaire -->
+            <div class="col-md-8 py-5">
+              <div class="d-flex justify-content-end mb-3">
+                <button class="btn btn-success" (click)="handleChangePassword()">
+                  Changer le mot de passe
+                </button>
+              </div>
+              <form (ngSubmit)="handleSubmit()">
+                <div class="mb-3">
+                  <label for="username" class="form-label">Nom d'utilisateur</label>
+                  <input
+                    type="text"
+                    id="username"
+                    [(ngModel)]="userData.username"
+                    name="username"
+                    class="form-control"
+                  />
+                </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input
+                      type="text"
+                      id="nom"
+                      [(ngModel)]="userData.nom"
+                      name="nom"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="prenom" class="form-label">Prénom</label>
+                    <input
+                      type="text"
+                      id="prenom"
+                      [(ngModel)]="userData.prenom"
+                      name="prenom"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    [(ngModel)]="userData.email"
+                    name="email"
+                    class="form-control"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">Sauvegarder</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      
+</body>
+  
